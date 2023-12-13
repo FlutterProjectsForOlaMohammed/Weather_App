@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:update_version_weather_app/Custom_Widgets/Custom_Button.dart';
-import 'package:update_version_weather_app/Widgets/Weather_Body.dart';
+import 'package:update_version_weather_app/Views/Search_View.dart';
+import 'package:update_version_weather_app/Widgets/No_Weather_body.dart';
+//import 'package:update_version_weather_app/Widgets/Weather_Body.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -10,16 +12,27 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[50],
-        title: Text(
+        title: const Text(
           "Weather App",
-          style:
-              TextStyle(color: Colors.blue[900], fontWeight: FontWeight.w500),
+          style: TextStyle(
+              color: Color.fromARGB(255, 120, 117, 117),
+              fontWeight: FontWeight.w900),
         ),
-        actions: const [
-          Custom_Button(),
+        actions: [
+          Custom_Button(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const SearchView();
+                  },
+                ),
+              );
+            },
+          ),
         ],
       ),
-      body: const WeatherBody(),
+      body: const NoWeatherBody(),
     );
   }
 }
