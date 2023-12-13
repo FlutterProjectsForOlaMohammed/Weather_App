@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:update_version_weather_app/Custom_Widgets/Custom_Button.dart';
+import 'package:update_version_weather_app/Custom_Widgets/Text_Form_Field_Border.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -7,15 +11,34 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
   });
   final String label, hintText;
+
   @override
   Widget build(BuildContext context) {
+    String cityName;
+    final GlobalKey<FormState> formKey = GlobalKey();
     return Form(
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextFormField(
-            decoration: InputDecoration(
-                suffixIcon: const Icon(Icons.search),
+        key: formKey,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              validator: (value) {
+                if (value?.isEmpty ?? true) {
+                  return "Field is Required";
+                }
+              },
+              onSaved: (value) {
+                cityName = value!;
+                log(cityName);
+              },
+              decoration: InputDecoration(
+                suffixIcon: Custom_Button(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
+                    }
+                  },
+                ),
                 suffixIconColor: const Color.fromRGBO(100, 181, 246, 1),
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
@@ -29,22 +52,12 @@ class CustomTextFormField extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 16),
                   child: Text(label),
                 ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(9),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(9),
-                  borderSide: const BorderSide(
-                    color: Colors.grey,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(9),
-                )),
+                border: TextFormFieldBorder(),
+                enabledBorder: TextFormFieldBorder(),
+                focusedBorder: TextFormFieldBorder(),
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

@@ -17,25 +17,27 @@ class SearchView extends StatelessWidget {
               fontStyle: FontStyle.italic),
         ),
       ),
-      body: const Column(children: [
-        SizedBox(
-          height: 200,
-        ),
-        CustomTextFormField(hintText: "Enter City Name ", label: "Search"),
-        SizedBox(
-          height: 150,
-          child: Center(
-            child: Text(
-              "I Hope You Have a Nice Day .",
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Color.fromARGB(255, 120, 117, 117),
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Pacifico"),
+      body: const SingleChildScrollView(
+        child: Column(children: [
+          SizedBox(
+            height: 200,
+          ),
+          CustomTextFormField(hintText: "Enter City Name ", label: "Search"),
+          SizedBox(
+            height: 150,
+            child: Center(
+              child: Text(
+                "I Hope You Have a Nice Day .",
+                style: TextStyle(
+                    fontSize: 24,
+                    color: Color.fromARGB(255, 120, 117, 117),
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Pacifico"),
+              ),
             ),
           ),
-        ),
-      ]),
+        ]),
+      ),
     );
   }
 }
